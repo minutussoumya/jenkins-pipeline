@@ -1,41 +1,29 @@
-pipeline 
-{
-    agent any
-
-    stages 
-    {
-        stage('Build') 
-        {
-            steps 
-            {
-                echo 'Build App'
+pipeline{
+    agent {label 'ubuntu'}
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building'
             }
         }
-
-        stage('Test') 
-        {
-            steps 
-            {
-                echo 'Test App'
+        stage('Testing') {
+            steps {
+                echo 'Testing'
+            }           
+        }
+        stage("Deploying") {
+            steps {
+                echo 'Deploying'
             }
         }
-
-        stage('Deploy') 
-        {
-            steps 
-            {
-                echo 'Deploy App'
-            }
-        }
+        
     }
-
-    post
+    post 
     {
-
-    	always
-    	{
-    		emailext body: 'Summary', subject: 'Pipeline Status', to: 'selenium3bymukesh@gmail.com'
-    	}
-
+        always
+        {
+            emailext body: 'summary of the pipeline status', subject: 'pipeline status', to: 'kamatesoumya111@gmail.com'
+            
+        }
     }
 }
